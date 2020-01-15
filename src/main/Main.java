@@ -20,6 +20,9 @@ public class Main extends Canvas implements Runnable {
 	private final int SCALE = 4;
 	
 	private BufferedImage image;
+	private BufferedImage player;
+	
+	private SpriteSheet sheet;
 	
 	public static void main(String[] args) {
 		
@@ -29,6 +32,8 @@ public class Main extends Canvas implements Runnable {
 	
 	public Main() {
 		
+		sheet = new SpriteSheet("/spritesheet.png");
+		player = sheet.getSprite(0, 0, 16, 16);
 		setPreferredSize(new Dimension(WIDTH*SCALE, HEIGTH*SCALE));
 		initFrame();
 		image = new BufferedImage(WIDTH, HEIGTH, BufferedImage.TYPE_INT_RGB);
@@ -78,13 +83,12 @@ public class Main extends Canvas implements Runnable {
 		}
 		
 		Graphics g = image.getGraphics();
-		g.setColor(new Color(0, 0, 0));
+		g.setColor(new Color(255, 255, 255));
 		g.fillRect(0, 0, WIDTH, HEIGTH);
 		
-		g.setFont(new Font("Arial", Font.BOLD, 20));
-		g.setColor(Color.WHITE);
-		g.drawString("Gabriel", 90, 90);
+		g.drawImage(player, 50, 50, null);
 		
+		g.dispose();
 		g = bs.getDrawGraphics();
 		g.drawImage(image, 0, 0, WIDTH*SCALE, HEIGTH*SCALE, null);
 		bs.show();
